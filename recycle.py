@@ -38,10 +38,14 @@ def check_playlists(old_playlists, playlist_ids):
     return
 
 
-# TODO: Keep record of old playlists in JSON file
 def main():
     playlist_ids = get_user_playlists()
-    playlist_tracks = get_playlist_tracks(playlist_ids)
+    # playlist_tracks = get_playlist_tracks(playlist_ids)
+    path = 'data.json'
+    # with open(path, '+w') as f:
+    #     f.write(json.dumps(playlist_tracks))
+    with open(path) as f:
+        playlist_tracks = json.load(f)
     print(playlist_tracks)
 
 
