@@ -28,25 +28,24 @@ def get_playlist_tracks(playlists):
     return res
 
 
-def check_playlists(old_playlists, playlist_ids):
+def check_playlists(old_playlists, playlist_ids, path):
     new_playlists = get_playlist_tracks(playlist_ids)
     for playlist in new_playlists.keys():
         if playlist in old_playlists.keys():
             for track in old_playlists[playlist]:
                 if track not in new_playlists[playlist]:
-                    sp.playlist_add_items('Recycle Bin', track[1])
+                    sp.playlist_add_items(playlist_ids['Recycle Bin'], [track[1]])
+    with open(path, '+w') as f:
+        f.write(json.dumps(new_playlists))
     return
 
 
 def main():
     playlist_ids = get_user_playlists()
-    # playlist_tracks = get_playlist_tracks(playlist_ids)
     path = 'data.json'
-    # with open(path, '+w') as f:
-    #     f.write(json.dumps(playlist_tracks))
     with open(path) as f:
         playlist_tracks = json.load(f)
-    print(playlist_tracks)
+    check_playlists(playlist_tracks, playlist_ids, path)
 
 
 if __name__ == '__main__':
