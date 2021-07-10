@@ -77,11 +77,6 @@ def check_playlists(table):
     return
 
 
-# TODO: New Workflow
-#       1. User authenticates, add current playlists to records
-#       2. User decides to "recycle" anything they've deleted
-#       3. Script runs and adds anything removed to recycle bin, updates records
-
 def recycle():
     curr_user = sp.current_user()['display_name']
     table_name = curr_user + '_tracks'
