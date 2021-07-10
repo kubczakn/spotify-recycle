@@ -1,27 +1,16 @@
 import sqlite3
-from sqlite3 import Error
-import json
-import spotipy
-import config
-from spotipy.oauth2 import SpotifyOAuth
 
-conn = sqlite3.connect('sql/tracks.db')
-scope = 'playlist-modify-public'
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-    scope=scope,
-    client_id=config.SPOTIPY_CLIENT_ID,
-    client_secret=config.SPOTIPY_CLIENT_SECRET,
-    redirect_uri=config.SPOTIPY_REDIRECT_URI))
+conn = sqlite3.connect('sql/tracks.db', check_same_thread=False)
 
 
-def query_db(table):
+def query_db(sp, table):
     cursor = conn.execute(
         '''SELECT * FROM %s;''' % table
     )
     res = {}
     rows = cursor.fetchall()
     if not rows:
-        res, recycle_bin_id = get_playlists()
+        res, recycle_bin_id = get_playlists(sp)
 
     else:
         for row in rows:
@@ -47,7 +36,7 @@ def insert_db(playlists, table):
     conn.commit()
 
 
-def get_playlists():
+def get_playlists(sp):
     playlists = sp.current_user_playlists()
     res = {}
     recycle_bin_id = ''
@@ -65,9 +54,9 @@ def get_playlists():
     return res, recycle_bin_id
 
 
-def check_playlists(table):
-    new_playlists, recycle_bin_id = get_playlists()
-    old_playlists = query_db(table)
+def check_playlists(sp, table):
+    new_playlists, recycle_bin_id = get_playlists(sp)
+    old_playlists = query_db(sp, table)
     for playlist in new_playlists.keys():
         if playlist in old_playlists.keys() and playlist != 'Recycle Bin':
             for track in old_playlists[playlist]:
@@ -77,7 +66,7 @@ def check_playlists(table):
     return
 
 
-def recycle():
+def recycle(sp):
     curr_user = sp.current_user()['display_name']
     table_name = curr_user + '_tracks'
     conn.execute(
@@ -85,8 +74,8 @@ def recycle():
         (ID INTEGER  PRIMARY KEY AUTOINCREMENT,
         PLAYLIST_ID TEXT NOT NULL, 
         TRACK_ID TEXT NOT NULL);''' % table_name)
-    check_playlists(table_name)
-    
+    check_playlists(sp, table_name)
+
 
 if __name__ == '__main__':
-    recycle()
+    print('Main')
