@@ -86,9 +86,7 @@ def recycle():
         PLAYLIST_ID TEXT NOT NULL, 
         TRACK_ID TEXT NOT NULL);''' % table_name)
     check_playlists(table_name)
-
-    # TODO: Select from user table, create data structure, compare with current
-
+    
 
 if __name__ == '__main__':
     recycle()
