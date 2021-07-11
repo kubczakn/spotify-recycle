@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Spotify Recycle Bin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/css/style.css" rel="stylesheet">
 </head>
-<body>
-    <h1 style="text-align:center">Spotify Recycle Bin</h1>
-    <div style="text-align:center;">
+<body class="text-center">
+    <div class="main-content">
+        <h1>Spotify Recycle Bin</h1>
+        <p>
+            Accidentally remove a song? Hit "Recycle" to recover any
+            missing songs from your latest recycling session.
+        </p>
+        <p>
+            New user? Hit "Recycle" to get started today.
+        </p>
         <form action="/recycle/" method="post">
-            <button name="recycleBtn" type="submit">Recycle</button>
+            <button name="recycleBtn" type="submit" class="btn btn-success btn-lg">Recycle</button>
         </form>
     </div>
 </body>

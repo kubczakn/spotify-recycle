@@ -75,7 +75,3 @@ def recycle(sp):
         PLAYLIST_ID TEXT NOT NULL, 
         TRACK_ID TEXT NOT NULL);''' % table_name)
     check_playlists(sp, table_name)
-
-
-if __name__ == '__main__':
-    print('Main')

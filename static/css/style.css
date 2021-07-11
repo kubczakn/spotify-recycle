@@ -1,0 +1,41 @@
+html,
+body {
+    height: 100%;
+    font-family: 'Noto Serif TC', serif;
+}
+
+body {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-image: url("../images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1,
+p {
+    color: white;
+    padding-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+}
+
+button {
+    color: black;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 750px;
+    padding: 15px;
+    margin: 0 auto 50px;
+}
